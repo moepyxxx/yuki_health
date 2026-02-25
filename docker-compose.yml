@@ -1,0 +1,39 @@
+services:
+  s3:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: "admin"
+      MINIO_ROOT_PASSWORD: "password"
+    command: server /data --console-address ":9001"
+    volumes:
+      - ./minio_data:/data
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: local-chroma
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma-data:/chroma/data
+    environment:
+      - IS_PERSISTENT=TRUE
+      - PERSIST_DIRECTORY=/chroma/data
+    restart: always
+
+
+  db:
+    image: postgres:16-alpine
+    container_name: local-db
+    restart: always
+    environment:
+      POSTGRES_USER: bird_user
+      POSTGRES_PASSWORD: bird_password
+      POSTGRES_DB: bird_health_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+volumes:
+  chroma-data:
