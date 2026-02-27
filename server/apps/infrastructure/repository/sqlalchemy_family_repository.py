@@ -2,7 +2,7 @@ from apps.domain import Family
 from apps.infrastructure.external import SqlAlchemyDBClient
 from .family_repository import IFamilyRepository
 from models import Family as FamilyModel
-from apps.infrastructure.external import DbClientNotFoundError
+from .error import NotFoundError
 
 
 class FamilyRepository(IFamilyRepository):
@@ -29,7 +29,7 @@ class FamilyRepository(IFamilyRepository):
     def get(self, id):
         record = self._db.session.get(FamilyModel, id)
         if record is None:
-            raise DbClientNotFoundError
+            raise NotFoundError
         return Family(
             name=record.name,
             nickname=record.nickname,

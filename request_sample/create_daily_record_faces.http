@@ -1,0 +1,9 @@
+POST http://localhost:8000/families/1/daily_record/feces
+Content-Type: multipart/form-data; boundary=bird-data-boundary
+
+--bird-data-boundary
+Content-Disposition: form-data; name="file"; filename="poop.png"
+Content-Type: image/png
+
+< ./test_image.png
+--bird-data-boundary--

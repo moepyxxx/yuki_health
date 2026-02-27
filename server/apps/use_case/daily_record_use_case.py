@@ -1,10 +1,10 @@
 from apps.domain import DailyFamilyFacesImage
 from apps.infrastructure.repository import FamilyRepository, DailyRecordRepository
 from typing import BinaryIO
-from datetime import date
-from server.apps.lib.utils import get_extension_from_binary
+from datetime import datetime
+from apps.lib.utils import get_extension_from_binary
 from apps.infrastructure.repository import NotFoundError
-from fastapi import HttpException
+from fastapi import HTTPException
 
 
 class DailyRecordUseCase:
@@ -21,10 +21,10 @@ class DailyRecordUseCase:
     ) -> DailyFamilyFacesImage:
         try:
             self.familyRepository.get(family_id)
-        except NotFoundError as e:
-            raise HttpException(status_code=404)
+        except NotFoundError:
+            raise HTTPException(status_code=404)
 
-        timestamp = date.now().strftime("%Y%m%d")
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         extension = get_extension_from_binary(file_obj=file_obj)
         file_name = f"{family_id}/{timestamp}{extension}"
 
@@ -33,5 +33,5 @@ class DailyRecordUseCase:
         )
         return self.repository.add_faces_image_record(
             family_id=family_id,
-            file_name=image_src,
+            image_src=image_src,
         )
