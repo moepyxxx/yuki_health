@@ -9,9 +9,10 @@ class SqlAlchemyDBClient:
         self._SessionLocal = sessionmaker(
             bind=self.engine, autocommit=False, autoflush=False
         )
+        self.session: Session = self._SessionLocal()
 
     @contextmanager
-    def get_session(self):
+    def get_transaction_session(self):
         """リポジトリが使うセッションを提供するコンテキストマネージャ"""
         session: Session = self._SessionLocal()
         try:
