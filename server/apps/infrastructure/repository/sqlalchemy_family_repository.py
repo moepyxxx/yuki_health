@@ -16,6 +16,7 @@ class FamilyRepository(IFamilyRepository):
                 nickname=family.nickname,
                 gender=family.gender,
                 birthday=family.birthday,
+                bird_type=family.bird_type,
             )
             session.add(record)
             session.flush()
@@ -24,6 +25,7 @@ class FamilyRepository(IFamilyRepository):
                 nickname=record.nickname,
                 gender=record.gender,
                 birthday=record.birthday,
+                bird_type=record.bird_type,
             )
 
     def get(self, id):
@@ -35,4 +37,5 @@ class FamilyRepository(IFamilyRepository):
             nickname=record.nickname,
             gender=record.gender,
             birthday=record.birthday,
+            bird_type=record.bird_type,
         )

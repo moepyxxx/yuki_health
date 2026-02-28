@@ -5,5 +5,6 @@ content-type: application/json
     "name": "ゆきみ",
     "nickname": "ゆっきちゃん",
     "gender": 2,
-    "birthday": "2025-12-25"
+    "birthday": "2025-12-25",
+    "bird_type": 0
 }

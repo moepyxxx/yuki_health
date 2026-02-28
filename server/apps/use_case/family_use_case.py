@@ -3,8 +3,11 @@ from apps.infrastructure.repository import FamilyRepository
 
 
 class FamilyUseCase:
-    def __init__(self, familyRepository: FamilyRepository):
-        self.repository = familyRepository
+    def __init__(
+        self,
+        familyRepository: FamilyRepository,
+    ):
+        self._repository = familyRepository
 
     def create(self, family: Family):
-        return self.repository.add(family=family)
+        return self._repository.add(family=family)
