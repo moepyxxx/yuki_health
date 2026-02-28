@@ -5,5 +5,5 @@ Content-Type: multipart/form-data; boundary=bird-data-boundary
 Content-Disposition: form-data; name="file"; filename="poop.png"
 Content-Type: image/png
 
-< ./test_image.png
+< ./feces_image.jpg
 --bird-data-boundary--

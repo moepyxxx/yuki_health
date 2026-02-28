@@ -1,2 +1,2 @@
-POST http://localhost:8000/families/2/daily_record/feces/6/analyze HTTP/1.1
+POST http://localhost:8000/families/2/daily_record/feces/7/analyze HTTP/1.1
 content-type: application/json
